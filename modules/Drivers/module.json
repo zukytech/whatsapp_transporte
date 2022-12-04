@@ -1,0 +1,21 @@
+{
+    "alias": "drivers",
+    "description": "",
+    "version":"1.1",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Drivers\\Providers\\Main"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "ownermenus":[
+        {
+            "name":"Drivers",
+            "route":"drivers.index",
+            "icon":"ni ni-delivery-fast text-pink"
+        }
+    ]
+}

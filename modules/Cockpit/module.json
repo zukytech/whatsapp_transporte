@@ -1,0 +1,105 @@
+{
+    "alias": "cockpit",
+    "version":"1.3",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Cockpit\\Providers\\Main"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "driver_fields":[{
+        "title": "Avatar",
+        "key": "avatar",
+        "ftype": "image",
+        "value":"https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-11-2-512.png"
+    },{
+        "title": "Vehicle",
+        "key": "vehicle",
+        "ftype": "input",
+        "value":""
+    },{
+        "title": "Vehicle Color",
+        "key": "vehicle_color",
+        "ftype": "input",
+        "value":""
+    },{
+        "title": "License plate",
+        "key": "plate_number",
+        "ftype": "input",
+        "value":""
+    }
+    ],
+    "vendor_fields":[{
+        "separator":"Ride tariff",
+        "title": "Tariff per kilometer in your currency",
+        "key": "cost_per_kilometer",
+        "ftype": "input",
+        "type":"number",
+        "value":2
+    },
+    {
+        "title": "Taxi start tariff in your currency",
+        "key": "cost_for_start",
+        "ftype": "input",
+        "type":"number",
+        "value":5
+    }],
+    "admin_fields":[{
+        "separator":"Ride tariff",
+        "title": "Tariff per kilometer in your currency",
+        "key": "COST_PER_KILOMETER",
+        "ftype": "input",
+        "type":"number",
+        "value":2,
+        "onlyin":"ft"
+    },
+    {
+        "title": "Taxi start tariff in your currency",
+        "key": "COST_FOR_START",
+        "ftype": "input",
+        "type":"number",
+        "value":5,
+        "onlyin":"ft"
+    },
+    {
+        "title": "Driver app Branch.io link",
+        "key": "DRIVER_APP_LINK",
+        "ftype": "input",
+        "value":""
+    },{
+        "title": "Client App Branch.io link",
+        "key": "CLIENT_APP_LINK",
+        "ftype": "input",
+        "value":""
+    }],
+    "ownermenus":[
+        {
+            "name":"Rides",
+            "route":"cockpit.index",
+            "params":{"page":"cockpit"},
+            "icon":"ni ni-spaceship text-red",
+            "onlyin":"isqrsaas"
+        }
+    ],
+    "adminmenus":[
+        {
+            "name":"Cockpit",
+            "route":"home",
+            "params":{"page":"cockpit"},
+            "icon":"ni ni-square-pin text-red",
+            "onlyin":"isft"
+        },
+        {
+            "name":"Rides",
+            "route":"cockpit.index",
+            "params":{"page":"cockpit"},
+            "icon":"ni ni-spaceship text-red",
+            "onlyin":"isft"
+        }
+        
+    ]
+}
