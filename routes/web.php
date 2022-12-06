@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompaniesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,18 +55,18 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
 
         Route::get('restaurants/loginas/{restaurant}', 'RestorantController@loginas')->name('restaurants.loginas');
         Route::get('stopimpersonate', 'RestorantController@stopImpersonate')->name('restaurants.stopImpersonate');
-        
+
 
         Route::get('removedemodata', 'RestorantController@removedemo')->name('restaurants.removedemo');
         Route::get('sitemap','SettingsController@regenerateSitemap')->name('regenerate.sitemap');
 
-        // Landing page settings 
+        // Landing page settings
         Route::get('landing', 'SettingsController@landing')->name('landing');
         Route::prefix('landing')->name('landing.')->group(function () {
             Route::get('posts/{type}', 'CRUD\PostsController@index')->name('posts');
             Route::get('posts/{type}/create', 'CRUD\PostsController@create')->name('posts.create');
             Route::post('posts/{type}', 'CRUD\PostsController@store')->name('posts.store');
-           
+
             Route::get('posts/edit/{post}', 'CRUD\PostsController@edit')->name('posts.edit');
             Route::put('posts/{post}', 'CRUD\PostsController@update')->name('posts.update');
             Route::get('posts/del/{post}', 'CRUD\PostsController@destroy')->name('posts.delete');
@@ -80,7 +81,7 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
             Route::get('/processes/del/{process}', 'ProcessController@destroy')->name('processes.delete');
         });
 
-       
+
 
         Route::resource('allergens', 'CRUD\AllergensController');
         Route::get('/allergens/del/{allergen}', 'CRUD\AllergensController@destroy')->name('allergens.delete');
@@ -107,7 +108,7 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
             Route::get('simpledelivery/del/{delivery}', 'SimpleDeliveryController@destroy')->name('simpledelivery.delete');
 
 
-            
+
 
             // Areas
             Route::resource('restoareas', 'RestoareasController');
@@ -125,7 +126,7 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
             Route::put('coupons/{coupon}', 'CouponsController@update')->name('coupons.update');
             Route::get('coupons/del/{coupon}', 'CouponsController@destroy')->name('coupons.delete');
 
-           
+
 
             //Banners
             Route::get('banners', 'BannersController@index')->name('banners.index');
@@ -137,6 +138,9 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
 
             //Language menu
             Route::post('storenewlanguage', 'RestorantController@storeNewLanguage')->name('storenewlanguage');
+
+            //Companies name, with laravel8
+            Route::get('companies/name/index', [CompaniesController::class, 'index'])->name('tetets');
         });
     });
 
@@ -170,7 +174,7 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
 
     Route::resource('clients', 'ClientController');
     Route::get('/clients_export', 'ClientController@exportCSV')->name('clients.export');
-    
+
     Route::resource('orders', 'OrderController');
     Route::post('/rating/{order}', 'OrderController@rateOrder')->name('rate.order');
     Route::get('/check/rating/{order}', 'OrderController@checkOrderRating')->name('check.rating');
@@ -249,7 +253,7 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
 
     Route::get('qr', 'QRController@index')->name('qr');
 
-    
+
     Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
     Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
@@ -326,7 +330,7 @@ if (count($exploded) > 3) {
     }
 
     for ($i = 0; $i < count($exploded); $i += 2) {
-        
+
         Route::get('/'.strtolower($exploded[$i]), 'FrontEndController@'.$mode)->name('lang.'.strtolower($exploded[$i]));
     }
 }

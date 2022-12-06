@@ -1,47 +1,54 @@
-
 <!-- Section 1 -->
 <section id="pricing" class="relative py-20 bg-gray-50">
     <div class="relative px-10 mx-auto max-w-7xl lg:px-16">
         <div class="max-w-3xl mx-auto mb-16 text-center lg:mb-24">
-            <h2 class="mt-3 mb-5 text-5xl font-medium font-heading">{{ __('taxi.pricing_title')}}</h2>
+            <h2 class="mt-3 mb-5 text-5xl font-medium font-heading">{{ __('taxi.pricing_title') }}</h2>
             <p class="mb-5 text-xl text-gray-400">{{ __('taxi.pricing_subtitle') }}</p>
         </div>
         <?php
-            $gridCount=count($plans)>2?3:2;
+        $gridCount = count($plans) > 2 ? 3 : 2;
         ?>
-        <div class="md:grid md:grid-cols-2 lg:grid-cols-{{$gridCount}} gap-x-10">
+        <div class="md:grid md:grid-cols-2 lg:grid-cols-{{ $gridCount }} gap-x-10">
             <?php
-                $colors=['border-blue-400','border-green-400','border-yellow-300','border-red-300','border-blue-400','border-green-400','border-yellow-300','border-red-300']
+            $colors = ['border-blue-400', 'border-green-400', 'border-yellow-300', 'border-red-300', 'border-blue-400', 'border-green-400', 'border-yellow-300', 'border-red-300'];
             ?>
-          
-                
-          
 
-            @foreach ($plans as $keyplan =>  $plan)
-                <div class="col-span-1 p-10 bg-white border-t-4 {{$colors[$keyplan]}}">
+
+
+
+            @foreach ($plans as $keyplan => $plan)
+                <div class="col-span-1 p-10 bg-white border-t-4 {{ $colors[$keyplan] }}">
                     <div class="flex flex-col pb-8 border-b border-gray-200">
-                        <h3 class="flex items-center text-5xl font-semibold text-green-400">{{ config('money')[strtoupper(config('settings.cashier_currency'))]['symbol'] }}{{ $plan['price'] }}<span class="inline-block pl-2 mt-2 text-xs text-gray-400 text-normal">/ {{  $plan['period'] == 1? __('month') :  __('year') }}</span></h3>
-                        <h4 class="mt-5 text-2xl font-medium">{{  __($plan['name']) }}</h4>
+                        <h3 class="flex items-center text-5xl font-semibold text-green-400">
+                            {{ config('money')[strtoupper(config('settings.cashier_currency'))]['symbol'] }}{{ $plan['price'] }}<span
+                                class="inline-block pl-2 mt-2 text-xs text-gray-400 text-normal">/
+                                {{ $plan['period'] == 1 ? __('month') : __('year') }}</span></h3>
+                        <h4 class="mt-5 text-2xl font-medium">{{ __($plan['name']) }}</h4>
                         <p class="mt-4 text-gray-500">{{ __($plan['description']) }}</p>
                     </div>
                     <ul class="px-3 pt-8 space-y-3">
-                        @foreach (explode(",",$plan['features']) as $feature)
+                        @foreach (explode(',', $plan['features']) as $feature)
                             <li class="flex font-medium text-gray-500">
-                                <svg class="w-6 h-6 mr-1.5 text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <svg class="w-6 h-6 mr-1.5 text-green-400" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                                 {{ __($feature) }}
                             </li>
-                           
                         @endforeach
 
-                        
+
                     </ul>
-                    
-                    <a href="{{ route('newrestaurant.register') }}" class="flex items-center justify-center w-full h-12 mt-8 font-medium text-blue-600 border-2 border-blue-500 rounded-full">
-                        {{ __('taxi.start_now')}}
+
+                    <a href="{{ route('newrestaurant.register') }}"
+                        class="flex items-center justify-center w-full h-12 mt-8 font-medium text-blue-600 border-2 border-blue-500 rounded-full">
+                        {{ __('taxi.start_now') }}
                     </a>
                 </div>
             @endforeach
-           
+
 
 
         </div>
@@ -50,7 +57,7 @@
 </section>
 
 
-<!-- Section pricing 
+<!-- Section pricing
 <section id="pricing" class="py-20 bg-gray-100">
     <div class="flex flex-col max-w-6xl px-12 mx-auto lg:px-8">
         <h1 class="max-w-md text-4xl font-extrabold text-gray-900 sm:mx-auto lg:max-w-none lg:text-5xl sm:text-center">Pricing Plans</h1>
@@ -220,7 +227,7 @@
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </section>
