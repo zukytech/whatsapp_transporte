@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Restorant;
 use Illuminate\Http\Request;
+use Akaunting\Module\Facade as Module;
+use App\Models\Companies;
 
 class CompaniesController extends Controller
 {
@@ -13,7 +15,7 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        return view('companies.index');
+
     }
 
     /**
@@ -23,7 +25,12 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->hasRole(['admin','manager'])) {
+            $title=Module::has('cloner')&&isset($_GET['cloneWith'])?__('Clone Restaurant')." ".(Restorant::findOrFail($_GET['cloneWith'])->name):__('Crear una compañia');
+            return view('companies.create',['title'=>$title]);
+        } else {
+            return redirect()->route('orders.index')->withStatus(__('No Access'));
+        }
     }
 
     /**
@@ -34,8 +41,21 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $compañia = new Companies;
+        $compañia->name = $request->name;
+        $compañia->save();
+
+        if (auth()->user()->hasRole(['admin','manager'])) {
+            $title=Module::has('cloner')&&isset($_GET['cloneWith'])?__('Clone Restaurant')." ".(Restorant::findOrFail($_GET['cloneWith'])->name):__('Crear una compañia');
+            return view('companies.create',['title'=>$title]);
+        } else {
+            return redirect()->route('orders.index')->withStatus(__('No Access'));
+        }
+     }
 
     /**
      * Display the specified resource.

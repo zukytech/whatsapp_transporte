@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CompaniesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -139,9 +138,10 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
             //Language menu
             Route::post('storenewlanguage', 'RestorantController@storeNewLanguage')->name('storenewlanguage');
 
-            //Companies name, with laravel8
-            Route::get('companies/name/index', [CompaniesController::class, 'index'])->name('tetets');
         });
+        //Companies name
+        Route::get('companies/name/create', 'CompaniesController@create');
+        Route::post('companies/name/store', 'CompaniesController@store')->name('store.companies');
     });
 
     Route::resource('cities', 'CitiesController');
