@@ -17,7 +17,7 @@
                     <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform border-t-2 border-blue-300" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="scale-0" x-transition:enter-end="scale-100" x-transition:leave="transition ease-out duration-300" x-transition:leave-start="scale-100" x-transition:leave-end="scale-0" style="display: none;"></span>
                 </span>
             </a>
-            
+
         </div>
 
         <div class="flex flex-col items-center px-10 pt-20 pb-40 lg:flex-row">
@@ -47,6 +47,20 @@
                     <div class="relative w-full mt-6 space-y-8">
                         <form  id="registerform" method="post" action="{{ route('newrestaurant.store') }}" autocomplete="off">
                             @csrf
+                            <div class="relative py-3">
+                                <label class="font-medium text-gray-900">Compañia</label>
+                                <select name="companie"
+                                    class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50">
+                                    @foreach ($companies as $companie)
+                                        <option value="{{ $companie->name }}" {{ old('companie') == $companie->name ? : 'selected' }}>{{ $companie->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('companie'))
+                                    <p class="text-xs text-red-900 mt-2 font-medium opacity-90">
+                                        {{ $errors->first('companie') }}</p>
+                                @endif
+                            </div>
                             <div class="relative py-3">
                                 <label class="font-medium text-gray-900">{{ __('taxi.company_or_brand_name')}}</label>
                                 <input value="{{ old('name')?old('name'):''}}" name="name" id="name" type="text" class="block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-100 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50" >

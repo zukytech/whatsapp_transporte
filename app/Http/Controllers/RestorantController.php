@@ -43,7 +43,7 @@ class RestorantController extends Controller
 {
     use Fields;
     use Modules;
-    
+
     protected $imagePath = 'uploads/restorants/';
 
     /**
@@ -79,7 +79,7 @@ class RestorantController extends Controller
 
             return Excel::download(new VendorsExport($items), 'vendors_'.time().'.csv', \Maatwebsite\Excel\Excel::CSV);
         }
-        
+
         if (auth()->user()->hasRole('admin')) {
             $allRes= $restaurants->orderBy('id', 'desc')->pluck('name','id');
             return view('restorants.index', [
@@ -101,7 +101,7 @@ class RestorantController extends Controller
 
     public function stopImpersonate()
     {
-        
+
         Auth::user()->stopImpersonating();
 
         return redirect()->route('home');
@@ -185,7 +185,7 @@ class RestorantController extends Controller
         $hours->restorant_id = $restaurant->id;
 
         $shift="_shift".$request->shift_id;
-        
+
         $hours->{'0_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
         $hours->{'0_to'} = config('settings.time_format') == "AM/PM" ? "5:00 PM" : "17:00";
         $hours->{'1_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
@@ -200,7 +200,7 @@ class RestorantController extends Controller
         $hours->{'5_to'} = config('settings.time_format') == "AM/PM" ? "5:00 PM" : "17:00";
         $hours->{'6_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
         $hours->{'6_to'} = config('settings.time_format') == "AM/PM" ? "5:00 PM" : "17:00";
-        
+
         $hours->save();
        }
 
@@ -220,7 +220,7 @@ class RestorantController extends Controller
             return redirect()->route('admin.restaurants.index')->withStatus(__('Restaurant successfully created.'));
         }
 
-        
+
     }
 
     /**
@@ -279,9 +279,9 @@ class RestorantController extends Controller
             array_push($hoursRange, $to);
         }
 
-        
 
-        
+
+
 
         //Languages
         $available_languages=[];
@@ -298,8 +298,8 @@ class RestorantController extends Controller
             }
         } catch (\Throwable $th) {
         }
-        
-        
+
+
 
         //currency
         if(strlen($restaurant->currency)>1){
@@ -320,20 +320,20 @@ class RestorantController extends Controller
                 "value"=>$restaurant->getConfig('stripe_enable',"false"),
                 "onlyin"=>"qrsaas"
             ],[
-                "title"=>"Stripe key", 
-                "key"=>"stripe_key", 
+                "title"=>"Stripe key",
+                "key"=>"stripe_key",
                 "value"=>$restaurant->getConfig('stripe_key',""),
                 "onlyin"=>"qrsaas"
             ],
             [
-                "title"=>"Stripe secret", 
-                "key"=>"stripe_secret", 
+                "title"=>"Stripe secret",
+                "key"=>"stripe_secret",
                 "value"=>$restaurant->getConfig('stripe_secret',""),
                 "onlyin"=>"qrsaas"
             ]);
         }
-  
-       
+
+
         $appFields=$this->convertJSONToFields($rawFields);
 
         $shiftsData = Hours::where(['restorant_id' => $restaurant->id])->get($hoursRange);
@@ -388,10 +388,10 @@ class RestorantController extends Controller
         $restaurant = Restorant::findOrFail($restaurantid);
         $restaurant->name = strip_tags($request->name);
         $thereIsRestaurantAddressChange=$restaurant->address.""!=$request->address."";
-        
+
         $restaurant->address = strip_tags($request->address);
         $restaurant->phone = strip_tags($request->phone);
-        
+
         $restaurant->description = strip_tags($request->description);
         $restaurant->minimum = strip_tags($request->minimum);
 
@@ -399,7 +399,7 @@ class RestorantController extends Controller
             $restaurant->fee = $request->fee;
             $restaurant->static_fee = $request->static_fee;
         }
-    
+
         //Update subdomain only if rest is not older than 1 day
         if(Carbon::parse($restaurant->created_at)->diffInDays(Carbon::now())<2){
             $restaurant->subdomain = $this->makeAlias(strip_tags($request->name));
@@ -409,7 +409,7 @@ class RestorantController extends Controller
             $restaurant->is_featured = $request->is_featured != null ? 1 : 0;
         }
 
-        
+
         $restaurant->can_pickup = $request->can_pickup == 'true' ? 1 : 0;
         $restaurant->can_deliver = $request->can_deliver == 'true' ? 1 : 0;
         $restaurant->can_dinein = $request->can_dinein == 'true' ? 1 : 0;
@@ -422,7 +422,7 @@ class RestorantController extends Controller
             $restaurant->setConfig('disable_callwaiter',$request->disable_callwaiter == 'true' ? 1 : 0);
         }
 
-        
+
         if($request->has('disable_ordering')){
             $restaurant->setConfig('disable_ordering',$request->disable_ordering == 'true' ? 1 : 0);
         }
@@ -457,20 +457,20 @@ class RestorantController extends Controller
         }
 
         if ($request->hasFile('resto_wide_logo')) {
-       
+
             $uuid = Str::uuid()->toString();
             $request->resto_wide_logo->move(public_path($this->imagePath), $uuid.'_original.'.'png');
             $restaurant->setConfig('resto_wide_logo',$uuid);
         }
 
         if ($request->hasFile('resto_wide_logo_dark')) {
-       
+
             $uuid = Str::uuid()->toString();
             $request->resto_wide_logo_dark->move(public_path($this->imagePath), $uuid.'_original.'.'png');
             $restaurant->setConfig('resto_wide_logo_dark',$uuid);
         }
 
-        
+
         if ($request->hasFile('resto_cover')) {
             $restaurant->cover = $this->saveImageVersions(
                 $this->imagePath,
@@ -497,7 +497,7 @@ class RestorantController extends Controller
             $newDefault->default=1;
             $newDefault->update();
         }
-        
+
 
         //Change currency
         $restaurant->currency=$request->currency;
@@ -520,10 +520,10 @@ class RestorantController extends Controller
             $geocoder = new Geocoder($client);
             $geocoder->setApiKey(config('geocoder.key'));
 
-         
+
             try {
                 $geoResults = $geocoder->getCoordinatesForAddress($restaurant->address);
-               
+
                 if ($geoResults['formatted_address'] == 'result_not_found') {
                     //No results found - do nothing
                 } else {
@@ -536,7 +536,7 @@ class RestorantController extends Controller
                 //API no capabilities - do nothing
             }
 
-            
+
             //End update location
         }
 
@@ -671,7 +671,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $hours = Hours::where(['id' => $request->shift_id])->first();
 
         $shift="_shift".$request->shift_id;
-        
+
         $hours->{'0_from'} = $request->{'0_from'.$shift} ?? null;
         $hours->{'0_to'} = $request->{'0_to'.$shift} ?? null;
         $hours->{'1_from'} = $request->{'1_from'.$shift} ?? null;
@@ -695,13 +695,14 @@ $restaurant=Restorant::findOrFail($restaurantid);
     {
         return view('restorants.register');
     }
-    
+
 
     public function storeRegisterRestaurant(Request $request)
     {
         //Validate first
         $theRules = [
             'name' => ['required', 'string', 'unique:companies,name', 'max:255'],
+            'companie' => ['required', 'string'],
             'name_owner' => ['required', 'string', 'max:255'],
             'email_owner' => ['required', 'string', 'email', 'unique:users,email,NULL,id,deleted_at,NULL', 'max:255'],
             'phone_owner' => ['required', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
@@ -718,6 +719,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $owner->name = strip_tags($request->name_owner);
         $owner->email = strip_tags($request->email_owner);
         $owner->phone = strip_tags($request->phone_owner) | '';
+        $owner->companie = strip_tags($request->companie);
         $owner->active = 0;
         $owner->api_token = Str::random(80);
 
@@ -749,7 +751,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $hours->restorant_id = $restaurant->id;
 
         $shift="_shift".$request->shift_id;
-        
+
         $hours->{'0_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
         $hours->{'0_to'} = config('settings.time_format') == "AM/PM" ? "5:00 AM" : "17:00";
         $hours->{'1_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
@@ -764,7 +766,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $hours->{'5_to'} = config('settings.time_format') == "AM/PM" ? "5:00 AM" : "17:00";
         $hours->{'6_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
         $hours->{'6_to'} = config('settings.time_format') == "AM/PM" ? "5:00 AM" : "17:00";
-        
+
         $hours->save();
 
         $restaurant->setConfig('disable_callwaiter', 0);
@@ -785,7 +787,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
                 return redirect()->route('front')->withStatus(__('notifications_thanks_andcheckemail'));
             }
 
-            
+
         } else {
             //Foodtiger
             return redirect()->route('newrestaurant.register')->withStatus(__('notifications_thanks_and_review'));
@@ -833,7 +835,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
             }else{
                 abort(404,'Not allowed');
             }
-            
+
         }
 
         $toRespond = [
@@ -907,10 +909,10 @@ $restaurant=Restorant::findOrFail($restaurantid);
                 $filename=Str::slug($tn, '_').".png";
                 $vendorURL.="?tid=".$_GET['table_id'];
             }
-            
-            
+
+
         }
-        
+
 
         if(Module::has('qrgen')){
             //With QR Module
@@ -918,14 +920,14 @@ $restaurant=Restorant::findOrFail($restaurantid);
         }else{
             //Without QR module
             $url = 'https://api.qrserver.com/v1/create-qr-code/?size=512x512&format=png&data='.$vendorURL;
-       
+
             $tempImage = tempnam(sys_get_temp_dir(), $filename);
             @copy($url, $tempImage);
 
             return response()->download($tempImage, $filename,array('Content-Type:image/png'));
         }
-        
-        
+
+
     }
 
     /**
@@ -974,7 +976,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         //3. Change locale to the new local
         app()->setLocale($newLocale);
         session(['applocale_change' => $newLocale]);
-      
+
 
         //5. Redirect
         return redirect()->route('items.index')->withStatus(__('New language successfully created.'));

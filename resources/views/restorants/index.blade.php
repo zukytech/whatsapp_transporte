@@ -28,7 +28,7 @@
                                         data-target="#modal-import-restaurants">{{ __('Import from CSV') }}</button>
                                 @endif
                                 @if (auth()->user()->hasRole('admin'))
-                                <a href="{{ route('admin.tetets') }}"
+                                <a href="companies/name/create"
                                     class="btn btn-sm btn-danger">{{ __('Add name') }}</a>
                             @endif
                                 <button id="show-hide-filters" class="btn btn-icon btn-1 btn-sm btn-outline-secondary"
