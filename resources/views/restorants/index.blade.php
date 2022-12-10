@@ -13,7 +13,7 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-10">
+                            <div class="col col-6">
                                 <h3 class="mb-0">{{ __('Compañias') }}</h3>
                             </div>
                             <div class="col-4 text-right">
@@ -29,7 +29,7 @@
                                 @endif
                                 @if (auth()->user()->hasRole('admin'))
                                 <a href="companies/name/create"
-                                    class="btn btn-sm btn-danger">{{ __('Agregar compañia') }}</a>
+                                    class="btn btn-sm btn-danger">{{ __('Agregar nombre') }}</a>
                             @endif
                                 <button id="show-hide-filters" class="btn btn-icon btn-1 btn-sm btn-outline-secondary"
                                     type="button">
