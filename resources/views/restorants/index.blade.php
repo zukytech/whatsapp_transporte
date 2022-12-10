@@ -1,6 +1,6 @@
-@extends('layouts.app', ['title' => __('Restaurants')])
+@extends('layouts.app', ['title' => __('Compañias')])
 @section('admin_title')
-    {{ __('Restaurants') }}
+    {{ __('Compañias') }}
 @endsection
 @section('content')
     @include('restorants.partials.modals')
@@ -13,13 +13,13 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="mb-0">{{ __('Restaurants') }}</h3>
+                            <div class="col-10">
+                                <h3 class="mb-0">{{ __('Compañias') }}</h3>
                             </div>
                             <div class="col-4 text-right">
                                 @if (auth()->user()->hasRole('admin'))
                                     <a href="{{ route('admin.restaurants.create') }}"
-                                        class="btn btn-sm btn-primary">{{ __('Add Restaurant') }}</a>
+                                        class="btn btn-sm btn-primary">{{ __('Agregar compañia') }}</a>
                                 @endif
                                 <a href="{{ route('admin.restaurants.index') }}?downlodcsv=true"
                                     class="btn btn-sm btn-outline-primary">{{ __('Export CSV') }}</a>
@@ -29,7 +29,7 @@
                                 @endif
                                 @if (auth()->user()->hasRole('admin'))
                                 <a href="companies/name/create"
-                                    class="btn btn-sm btn-danger">{{ __('Add name') }}</a>
+                                    class="btn btn-sm btn-danger">{{ __('Agregar compañia') }}</a>
                             @endif
                                 <button id="show-hide-filters" class="btn btn-icon btn-1 btn-sm btn-outline-secondary"
                                     type="button">
@@ -68,10 +68,9 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">{{ __('Name') }}</th>
-                                    <th scope="col">{{ __('Logo') }}</th>
-                                    <th scope="col">{{ __('Owner') }}</th>
-                                    <th scope="col">{{ __('Owner email') }}</th>
+                                    <th scope="col">{{ __('Nombre') }}</th>
+                                    <th scope="col">{{ __('Compañia') }}</th>
+                                    <th scope="col">{{ __('Emaill') }}</th>
                                     <th scope="col">{{ __('Creation Date') }}</th>
                                     <th scope="col">{{ __('Activs') }}</th>
                                     <th scope="col"></th>
@@ -90,8 +89,7 @@
                                             </td>
                                         @endif
 
-                                        <td><img class="rounded" src={{ $restorant->icon }} width="50px"
-                                                height="50px"></img></td>
+                                        <td>{{ $restorant->description }}</td>
                                         <td>{{ $restorant->user ? $restorant->user->name : __('Deleted') }}</td>
                                         <td>
                                             <a

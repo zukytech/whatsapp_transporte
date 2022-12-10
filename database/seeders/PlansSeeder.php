@@ -14,11 +14,11 @@ class PlansSeeder extends Seeder
      */
     public function run()
     {
-        
+
         if(!config('settings.is_whatsapp_ordering_mode')){
             if(config('app.issd')){
                 //Social Driver
-                DB::table('plan')->insert([
+              /*  DB::table('plan')->insert([
                     'name' => 'Free',
                     'limit_items'=>1,
                     'limit_orders'=>10,
@@ -29,8 +29,8 @@ class PlansSeeder extends Seeder
                     'created_at' => now(),
                     'updated_at' => now(),
                     'enable_ordering'=>1,
-                ]);
-        
+                ]);*/
+
                 DB::table('plan')->insert([
                     'name' => 'Individual',
                     'limit_items'=>1,
@@ -44,7 +44,7 @@ class PlansSeeder extends Seeder
                     'enable_ordering'=>1,
                     'period'=>1,
                 ]);
-        
+
                 DB::table('plan')->insert([
                     'name' => 'Company',
                     'limit_items'=>10,
@@ -86,7 +86,7 @@ class PlansSeeder extends Seeder
                     'updated_at' => now(),
                     'enable_ordering'=>1,
                 ]);
-        
+
                 DB::table('plan')->insert([
                     'name' => 'Pro',
                     'limit_items'=>0,
@@ -100,7 +100,7 @@ class PlansSeeder extends Seeder
                     'enable_ordering'=>1,
                     'period'=>1,
                 ]);
-        
+
                 DB::table('plan')->insert([
                     'name' => 'Pro Yearly',
                     'limit_items'=>0,
@@ -128,7 +128,7 @@ class PlansSeeder extends Seeder
                     'updated_at' => now(),
                     'enable_ordering'=>0,
                 ]);
-        
+
                 DB::table('plan')->insert([
                     'name' => 'Pro',
                     'limit_items'=>0,
@@ -158,7 +158,7 @@ class PlansSeeder extends Seeder
                         'updated_at' => now(),
                         'enable_ordering'=>1,
                     ]);
-            
+
                     DB::table('plan')->insert([
                         'name' => 'Starter',
                         'limit_items'=>0,
@@ -171,7 +171,7 @@ class PlansSeeder extends Seeder
                         'updated_at' => now(),
                         'enable_ordering'=>1,
                     ]);
-            
+
                     DB::table('plan')->insert([
                         'name' => 'Pro',
                         'limit_items'=>0,
@@ -199,7 +199,7 @@ class PlansSeeder extends Seeder
                         'updated_at' => now(),
                         'enable_ordering'=>2,
                     ]);
-            
+
                     DB::table('plan')->insert([
                         'name' => 'Starter',
                         'limit_items'=>0,
@@ -212,7 +212,7 @@ class PlansSeeder extends Seeder
                         'updated_at' => now(),
                         'enable_ordering'=>1,
                     ]);
-            
+
                     DB::table('plan')->insert([
                         'name' => 'Pro',
                         'limit_items'=>0,
@@ -227,11 +227,11 @@ class PlansSeeder extends Seeder
                         'enable_ordering'=>1,
                     ]);
                 }
-                
+
             }
-           
+
         }else{
-           
+
             //Whatsapp
             DB::table('plan')->insert([
                 'name' => 'Lite',
@@ -245,7 +245,7 @@ class PlansSeeder extends Seeder
                 'updated_at' => now(),
                 'enable_ordering'=>2,
             ]);
-    
+
             DB::table('plan')->insert([
                 'name' => 'Pro',
                 'limit_items'=>0,
