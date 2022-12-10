@@ -39,7 +39,7 @@
                                 <h6 class="heading-small text-muted mb-4">{{ __('Owner information') }}</h6>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-success mt-4">{{ __('Guardar') }}</button>
                                 </div>
                             </form>
                         </div>

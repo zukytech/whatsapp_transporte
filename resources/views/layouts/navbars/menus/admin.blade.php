@@ -38,7 +38,7 @@
     @endif
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.restaurants.index') }}">
-            <i class="ni ni-shop text-info"></i> {{ __('Restaurants') }}
+            <i class="ni ni-shop text-info"></i> {{ __('Compañias') }}
         </a>
     </li>
     @if(config('settings.multi_city'))
@@ -55,7 +55,7 @@
             </a>
         </li>
     @endif
-        
+
     @if(config('settings.app_dev'))
         <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.restaurant.banners.index') }}">
@@ -63,7 +63,7 @@
             </a>
          </li>
      @endif
-   
+
 
     @if(!config('settings.hideApps'))
         <li class="nav-item">
@@ -72,7 +72,7 @@
             </a>
         </li>
     @endif
-        
+
     <li class="nav-item">
         <a class="nav-link" href="#navbar-resources" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-maps">
             <i class="ni ni-single-copy-04 text-primary"></i>
@@ -92,8 +92,8 @@
         </div>
     </li>
 
-        
-    
+
+
 
         <li class="nav-item">
             <a class="nav-link" href="#navbar-system" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-maps">
@@ -154,7 +154,7 @@
                             </a>
                         </li>
                     </li>
-                    
+
                 </ul>
             </div>
         </li>
@@ -190,5 +190,5 @@
             </div>
         </li>
 
-        
+
 </ul>
