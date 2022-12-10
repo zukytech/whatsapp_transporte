@@ -81,14 +81,14 @@ class RestorantController extends Controller
         }
 
         if (auth()->user()->hasRole('admin')) {
-            $allRes= $restaurants->orderBy('id', 'desc')->pluck('name','id');
+            $allRes= $restaurants->orderBy('id', 'desc')->pluck('name','id', 'companie', 'description');
             return view('restorants.index', [
                 'parameters'=>count($_GET) != 0,
                 'hasCloner'=>Module::has('cloner'),
                 'allRes'=>$allRes,
                 'restorants' => $restaurants->orderBy('id', 'desc')->paginate(10)]);
         } if (auth()->user()->hasRole('manager')) {
-            $allRes= $restaurants->whereIn('id',auth()->user()->getManagerVendors())->orderBy('id', 'desc')->pluck('name','id');
+            $allRes= $restaurants->whereIn('id',auth()->user()->getManagerVendors())->orderBy('id', 'desc')->pluck('name','id', 'companie');
             return view('restorants.index', [
                 'parameters'=>count($_GET) != 0,
                 'hasCloner'=>Module::has('cloner'),
@@ -736,7 +736,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $restaurant = new Restorant;
         $restaurant->name = strip_tags($request->name);
         $restaurant->user_id = $owner->id;
-        $restaurant->description = strip_tags($request->description.'');
+        $restaurant->description = strip_tags($request->companie);
         $restaurant->minimum = $request->minimum | 0;
         $restaurant->lat = config('settings.default_lat',0);
         $restaurant->lng = config('settings.default_lng',0);
