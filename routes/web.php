@@ -50,9 +50,9 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
         ]);
         Route::put('restaurants_app_update/{restaurant}', 'RestorantController@updateApps')->name('restaurant.updateApps');
 
-        Route::get('restaurants_add_new_shift/{restaurant}', 'RestorantController@addnewshift')->name('restaurant.addshift');
+        Route::get('compañia_add_new_shift/{restaurant}', 'RestorantController@addnewshift')->name('restaurant.addshift');
 
-        Route::get('restaurants/loginas/{restaurant}', 'RestorantController@loginas')->name('restaurants.loginas');
+        Route::get('compañia/loginas/{restaurant}', 'RestorantController@loginas')->name('restaurants.loginas');
         Route::get('stopimpersonate', 'RestorantController@stopImpersonate')->name('restaurants.stopImpersonate');
 
 
@@ -150,10 +150,10 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
     Route::post('/updateres/location/{restaurant}', 'RestorantController@updateLocation');
     Route::post('/updateres/radius/{restaurant}', 'RestorantController@updateRadius');
     Route::post('/updateres/delivery/{restaurant}', 'RestorantController@updateDeliveryArea');
-    Route::post('/import/restaurants', 'RestorantController@import')->name('import.restaurants');
+    Route::post('/import/compañia', 'RestorantController@import')->name('import.restaurants');
     Route::get('/restaurant/{restaurant}/activate', 'RestorantController@activateRestaurant')->name('restaurant.activate');
     Route::post('/restaurant/workinghours', 'RestorantController@workingHours')->name('restaurant.workinghours');
-    Route::get('restaurants/working_hours/remove/{hours}','RestorantController@workingHoursremove')->name('restaurant.workinghoursremove');
+    Route::get('compañia/working_hours/remove/{hours}','RestorantController@workingHoursremove')->name('restaurant.workinghoursremove');
     Route::post('/restaurant/address','RestorantController@getCoordinatesForAddress')->name('restaurant.coordinatesForAddress');
 
     Route::prefix('finances')->name('finances.')->group(function () {
@@ -182,7 +182,7 @@ Route::group(['middleware' => ['auth','impersonate']], function () {
     Route::get('ordertracingapi/{order}', 'OrderController@orderLocationAPI');
     Route::get('liveapi', 'OrderController@liveapi');
     Route::get('driverlocations', 'DriverController@driverlocations');
-    Route::get('restaurantslocations', 'RestorantController@restaurantslocations');
+    Route::get('compañialocations', 'RestorantController@restaurantslocations');
 
     Route::get('live', 'OrderController@live')->middleware('isOwnerOnPro');
     Route::get('/updatestatus/{alias}/{order}', ['as' => 'update.status', 'uses'=>'OrderController@updateStatus']);

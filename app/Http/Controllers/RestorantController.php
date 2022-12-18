@@ -733,7 +733,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
 
         //welcome notification
         //Create Restorant
-        $restaurant = new Restorant;
+      /*  $restaurant = new Restorant;
         $restaurant->name = strip_tags($request->name);
         $restaurant->user_id = $owner->id;
         $restaurant->description = strip_tags($request->companie);
@@ -744,11 +744,11 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $restaurant->phone = $owner->phone;
         $restaurant->active = 0;
         $restaurant->subdomain = null;
-        $restaurant->save();
+        $restaurant->save();*/
 
         //default hours
         $hours = new Hours();
-        $hours->restorant_id = $restaurant->id;
+       // $hours->restorant_id = $restaurant->id;
 
         $shift="_shift".$request->shift_id;
 
@@ -769,15 +769,15 @@ $restaurant=Restorant::findOrFail($restaurantid);
 
         $hours->save();
 
-        $restaurant->setConfig('disable_callwaiter', 0);
-        $restaurant->setConfig('disable_ordering', 0);
+       /* $restaurant->setConfig('disable_callwaiter', 0);
+        $restaurant->setConfig('disable_ordering', 0);*/
 
          //Fire event
-         NewVendor::dispatch($owner,$restaurant);
-
+         //NewVendor::dispatch($owner,$restaurant);
+//
         if (config('app.isqrsaas') || config('settings.directly_approve_resstaurant')) {
             //QR SaaS - or directly approve
-            $this->makeRestaurantActive($restaurant);
+           // $this->makeRestaurantActive($restaurant);
 
             //We can have a usecase when lading id disabled
             if(config('settings.disable_landing')){

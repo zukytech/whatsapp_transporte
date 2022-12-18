@@ -31,6 +31,7 @@
                                     <th scope="col">{{ __('Email') }}</th>
                                     <th scope="col">{{ __('Acceptance rating') }}</th>
                                     <th scope="col">{{ __('Creation Date') }}</th>
+                                    <th scope="col">{{ __('Compañia') }}</th>
                                     <th scope="col">{{ __('Active') }}</th>
                                     <th scope="col"></th>
                                 </tr>
