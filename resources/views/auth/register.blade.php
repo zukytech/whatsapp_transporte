@@ -94,12 +94,12 @@
                             </div>
                             @endif
 
-                            
+
 
 
                             <div class="text-center">
                                 @if (strlen(config('settings.recaptcha_site_key'))>2)
-                           
+
                                     @if ($errors->has('g-recaptcha-response'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
@@ -112,7 +112,7 @@
                                 @endif
 
                                 <br /><br />
-                                <div class="form-check"><input type="checkbox" name="termsCheckBox" id="termsCheckBox" class="h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top  "> 
+                                <div class="form-check"><input type="checkbox" name="termsCheckBox" id="termsCheckBox" class="h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top  ">
                                     <label for="terms" class="form-check-label text-gray-500">
                                     &nbsp;&nbsp;{{__('i_agree_to')}}
                                     <a href="{{config('settings.link_to_ts')}}" target="_blank" style="text-decoration: underline;">{{__('terms_of_service')}}</a> {{__('and')}}
@@ -122,20 +122,20 @@
 
                                 <script>
                                     window.onload = function () {
-                                
+
                                     $('#termsCheckBox').on('click',function () {
                                         $('#thesubmitbtn').prop("disabled", !$("#termsCheckBox").prop("checked"));
                                         if(this.checked){
                                             $('#thesubmitbtn').addClass('opacity-100');
                                         }else{
                                             $('#thesubmitbtn').removeClass('opacity-100');
-                                             
+
                                         }
-                                       
+
                                     })
                                 }
                                 </script>
-                               
+
                             </div>
                         </form>
                     </div>
@@ -143,8 +143,8 @@
                 <div class="row mt-3">
                     <div class="col-6">
                         @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="text-light">
-                                <small>{{ __('Forgot password?') }}</small>
+                            <a href="{{ route('password.request') }}" class="text-danger">
+                                <small class="text-danger">{{ __('¿Se te olvidó tu contraseña?') }}</small>
                             </a>
                         @endif
                     </div>

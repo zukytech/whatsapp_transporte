@@ -27,10 +27,10 @@
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                         data-target="#modal-import-restaurants">{{ __('Import from CSV') }}</button>
                                 @endif
-                                @if (auth()->user()->hasRole('admin'))
+                          {{--       @if (auth()->user()->hasRole('admin'))
                                 <a href="companies/name/create"
                                     class="btn btn-sm btn-danger">{{ __('Agregar nombre') }}</a>
-                            @endif
+                            @endif --}}
                                 <button id="show-hide-filters" class="btn btn-icon btn-1 btn-sm btn-outline-secondary"
                                     type="button">
                                     <span class="btn-inner--icon"><i id="button-filters" class="ni ni-bold-down"></i></span>
@@ -68,8 +68,8 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">{{ __('Nombre') }}</th>
                                     <th scope="col">{{ __('Compañia') }}</th>
+                                    <th scope="col">{{ __('Dueño') }}</th>
                                     <th scope="col">{{ __('Emaill') }}</th>
                                     <th scope="col">{{ __('Creation Date') }}</th>
                                     <th scope="col">{{ __('Activs') }}</th>
@@ -89,7 +89,6 @@
                                             </td>
                                         @endif
 
-                                        <td>{{ $restorant->description }}</td>
                                         <td>{{ $restorant->user ? $restorant->user->name : __('Deleted') }}</td>
                                         <td>
                                             <a
