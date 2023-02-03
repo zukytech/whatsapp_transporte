@@ -181,7 +181,7 @@ class RestorantController extends Controller
 
        //default hours
        if(!$request->has('cloneWith')){
-        $hours = new Hours();
+       /* $hours = new Hours();
         $hours->restorant_id = $restaurant->id;
 
         $shift="_shift".$request->shift_id;
@@ -201,7 +201,7 @@ class RestorantController extends Controller
         $hours->{'6_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
         $hours->{'6_to'} = config('settings.time_format') == "AM/PM" ? "5:00 PM" : "17:00";
 
-        $hours->save();
+        $hours->save();*/
        }
 
         $restaurant->setConfig('disable_callwaiter', 0);
@@ -747,7 +747,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $restaurant->save();*/
 
         //default hours
-        $hours = new Hours();
+       /* $hours = new Hours();
        // $hours->restorant_id = $restaurant->id;
 
         $shift="_shift".$request->shift_id;
@@ -767,7 +767,7 @@ $restaurant=Restorant::findOrFail($restaurantid);
         $hours->{'6_from'} = config('settings.time_format') == "AM/PM" ? "9:00 AM" : "09:00";
         $hours->{'6_to'} = config('settings.time_format') == "AM/PM" ? "5:00 AM" : "17:00";
 
-        $hours->save();
+        $hours->save();*/
 
        /* $restaurant->setConfig('disable_callwaiter', 0);
         $restaurant->setConfig('disable_ordering', 0);*/
